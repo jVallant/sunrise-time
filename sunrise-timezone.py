@@ -3,7 +3,7 @@ from math import pi, sin, cos, tan, acos, radians, degrees
 import os
 from datetime import datetime
 
-standard_input = ['48.2082','16.3738', 'r', '2:00', '','Sunrise'] # Vienna
+standard_input = ['48.2082','16.3738', 'r', '2:00', '','SunriseTZ'] # Vienna
 
 tmp_file='tmp_raw_timezone.zic'
 months=['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
@@ -16,7 +16,7 @@ def main() -> None:
 
     latitude = float(input('Your location (latitude, N is positive S is negative) '))
     assert -180<latitude<180, f'Input: {latitude} allowed inputs: -180<latitude<180' 
-    longitude = float(input('Your location (longitude, E is +, w is -): '))
+    longitude = float(input('Your location (longitude, E is positive, w is negative): '))
     assert -180<longitude<180, f'Input: {longitude} allowed inputs: -180<longitude<180' 
 
     sunrise_set_noon = input('base time on r: sunrise, s: sunset or n: solar noon: ').lower()
@@ -37,7 +37,9 @@ def main() -> None:
     recalibration_time = float(recalibration_time)
 
     timezoneName= input('Timezone Name: ')
-    assert timezoneName!=''
+    if recalibration_time == '':
+        recalibration_time = 'SunriseTZ'
+    #assert timezoneName!=''
 
     startYear=str(datetime.now().year) 
     endYear=str(datetime.now().year+2) # maximum of 500 time changes, otherwise there is some weird behavior (500/256 ~=2)
@@ -56,7 +58,8 @@ def main() -> None:
     file.close()
 
     # ------------- done -------------
-    print(f'\nPlease execute command: sudo zic {tmp_file}\n')
+    print(f'\nPlease execute command: sudo zic {tmp_file}')
+    print(f'and the command: sudo timedatectl set-timezone {timezoneName}')
     #os.system(f'zic -v {tmp_file}') # needs sudo 
     #print(open(tmp_file).read())
     if input('Remove tmp file [Y/n]:') in ['','y','Y','yes','Yes']:

@@ -15,6 +15,6 @@ Creating a program which crates a timezone based on the sunrise, solar\noon or s
 1. execute 'python sunrise-timezone.py'
 2. fill out the questions
 3. execute 'sudo zic tmp_raw_timezone.zic' to create the tz file into the system directory (/usr/share/zoneinfo/)
-4. execute 'sudo timedatectl set-timezone Sunrise' to switch to the timezone (Sunrise is the default name)
+4. execute 'sudo timedatectl set-timezone SunriseTZ' to switch to the timezone (SunriseTZ is the default name)
 
 
