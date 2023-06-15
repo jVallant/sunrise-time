@@ -59,9 +59,11 @@ def main() -> None:
 
     # ------------- done -------------
     print(f'\nPlease execute command: sudo zic {tmp_file}')
-    print(f'and the command: sudo timedatectl set-timezone {timezoneName}')
+    print(f'and the command: sudo timedatectl set-timezone {timezoneName}\n')
+
     #os.system(f'zic -v {tmp_file}') # needs sudo 
     #print(open(tmp_file).read())
+    
     if input('Remove tmp file [Y/n]:') in ['','y','Y','yes','Yes']:
         os.remove(tmp_file)
         print('tmp file deleted')
