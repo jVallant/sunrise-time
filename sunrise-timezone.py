@@ -41,8 +41,8 @@ def main() -> None:
         timezoneName = 'SunriseTZ'
     #assert timezoneName!=''
 
-    startYear=str(datetime.now().year) 
-    endYear=str(datetime.now().year+2) # maximum of 500 time changes, otherwise there is some weird behavior (500/256 ~=2)
+    start_year=str(datetime.now().year) 
+    end_year=str(datetime.now().year+2) # maximum of 500 time changes, otherwise there is some weird behavior (500/256 ~=2)
 
     # ------------- processing -------------
     file=open(tmp_file, 'w')
@@ -52,7 +52,7 @@ def main() -> None:
         if day.tm_yday%2==0: # needs to skip every other day otherwise there are too many lines (limit is 256) https://codebrowser.dev/glibc/glibc/timezone/zic.c.html#2987 -> https://codebrowser.dev/glibc/glibc/timezone/tzfile.h.html#111
             continue 
         #            Rule  NAME  FROM  TO  TYPE  IN  ON  AT  SAVE  LETTER/S
-        file.write(f'Rule Rule {startYear} {endYear} - {months[day.tm_mon]} {day.tm_mday:2} {int((-sunrise+recalibration_time)//60)+offset:2}:{int((sunrise+recalibration_time)%60):02} {-int(sunrise//60)+offset:2}:{int(sunrise%60):02}:{int(sunrise%1*60):02} - \n')
+        file.write(f'Rule Rule {start_year} {end_year} - {months[day.tm_mon]} {day.tm_mday:2} {int((-sunrise+recalibration_time)//60)+offset:2}:{int((sunrise+recalibration_time)%60):02} {-int(sunrise//60)+offset:2}:{int(sunrise%60):02}:{int(sunrise%1*60):02} - \n')
     file.write('# Zone NAME STDOFF RULES FORMAT [UNTIL]\n')
     file.write(f'Zone {timezoneName} {start_time.tm_hour-offset}:{start_time.tm_min:02} Rule SUN{sunrise_set_noon.capitalize()}\n')
     file.close()
