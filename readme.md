@@ -2,13 +2,12 @@
 
 ## Goal
 
-Creating a program which crates a timezone based on the sunrise, solar\noon or sunset given a specific coordinate. And add it to the system files
+Creating a program which crates a timezone based on the sunrise, solar\noon or sunset given a specific coordinate. Add the tz file the system tz files and make it the users timezone.
 
 ## Problems:
 
 - Many programs (ex. Browsers) will ignore it as their libaries have tz files build in and they will not lock at system files
 - Works for Linux, likely android (if rooted, and file copied from PC) and maybe Mac
--
 
 ## Usage
 
