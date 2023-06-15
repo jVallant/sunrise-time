@@ -37,8 +37,8 @@ def main() -> None:
     recalibration_time = float(recalibration_time)
 
     timezoneName= input('Timezone Name: ')
-    if recalibration_time == '':
-        recalibration_time = 'SunriseTZ'
+    if timezoneName == '':
+        timezoneName = 'SunriseTZ'
     #assert timezoneName!=''
 
     startYear=str(datetime.now().year) 
